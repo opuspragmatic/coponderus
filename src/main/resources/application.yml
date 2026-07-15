@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: coponderus-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/coponderus
+    username: ${DB_USER:coponderus}
+    password: ${DB_PASSWORD:coponderus}
+
+  jpa:
+    # Le schema est piloté par Flyway, pas par Hibernate : "validate" verifie
+    # que les entites correspondent au schema, sans jamais le modifier lui-meme.
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8080
+
+logging:
+  level:
+    org.hibernate.SQL: debug
