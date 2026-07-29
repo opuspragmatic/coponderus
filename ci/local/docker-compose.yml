@@ -4,9 +4,9 @@ services:
     image: postgres:15
     restart: unless-stopped
     environment:
-      POSTGRES_USER: "${POSTGRES_USER}"
-      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
-      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER:-coponderus}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-coponderus}"
+      POSTGRES_DB: "${POSTGRES_DB:-coponderus}"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
