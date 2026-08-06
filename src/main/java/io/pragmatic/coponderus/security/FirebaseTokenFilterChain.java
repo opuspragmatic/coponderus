@@ -9,6 +9,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class FirebaseTokenFilterChain {
 
+     private final FirebaseJwtAuthenticationConverter firebaseJwtAuthenticationConverter;
+
+    public FirebaseTokenFilterChain(FirebaseJwtAuthenticationConverter firebaseJwtAuthenticationConverter) {
+        this.firebaseJwtAuthenticationConverter = firebaseJwtAuthenticationConverter;
+    }
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -17,7 +23,7 @@ public class FirebaseTokenFilterChain {
                 .requestMatchers("/api/**").authenticated()
                 .anyRequest().permitAll()
             )
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
+            .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(firebaseJwtAuthenticationConverter)));
         return http.build();
     }
 }
