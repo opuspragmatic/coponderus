@@ -7,3 +7,5 @@ target/
 .DS_Store
 *.log
 .env
+coponderus-firebase-adminsdk.json
+ci/create_github_issues.py
